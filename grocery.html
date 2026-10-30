@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PinkBasket - Grocery App</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #fff5f9;
+    color: #45445a;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(120deg, #f7b6d0, #a9d9fa);
+    padding: 22px 20px 30px;
+    border-radius: 0 0 28px 28px;
+    color: white;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #eaf7ff;
+}
+
+.profile {
+    background: #ffffff55;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+}
+
+.header-content {
+    margin-top: 25px;
+}
+
+.header-content h1 {
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.header-content p {
+    font-size: 12px;
+    margin-top: 6px;
+    opacity: .9;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px 16px 40px;
+}
+
+/* STAT CARDS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: -42px;
+    position: relative;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 17px;
+    padding: 15px 8px;
+    text-align: center;
+    box-shadow: 0 5px 18px #d9c9dc25;
+}
+
+.stat-card .emoji {
+    font-size: 20px;
+}
+
+.stat-card p {
+    font-size: 10px;
+    color: #9993a8;
+    margin-top: 5px;
+}
+
+.stat-card h2 {
+    font-size: 17px;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+}
+
+.pink { color: #e97eaa; }
+.blue { color: #65a9df; }
+.purple { color: #a48bd7; }
+
+/* SECTION */
+
+.section {
+    margin-top: 27px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* FORM */
+
+.card {
+    background: white;
+    padding: 19px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px #d9c9dc20;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: #817b91;
+    font-weight: 600;
+    margin: 12px 0 6px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #f0dce7;
+    background: #fffaff;
+    border-radius: 11px;
+    outline: none;
+    font-size: 13px;
+    color: #55516a;
+}
+
+input:focus, select:focus {
+    border-color: #ed9fbd;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #f29cbe, #8bc9f1);
+    cursor: pointer;
+}
+
+/* SEARCH */
+
+.search {
+    margin-bottom: 13px;
+}
+
+/* CATEGORY FILTER */
+
+.filters {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-btn {
+    flex-shrink: 0;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 25px;
+    background: #f9e9f1;
+    color: #997a91;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: #ee9fbd;
+    color: white;
+}
+
+/* ITEMS */
+
+.item {
+    background: #fff9fc;
+    border: 1px solid #f7e8ef;
+    border-radius: 15px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 11px;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.item-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    background: #eaf5ff;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.item h3 {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.item small {
+    font-size: 10px;
+    color: #aaa1b3;
+}
+
+.item-right {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.item-right strong {
+    color: #e77da9;
+    font-size: 13px;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 6px;
+}
+
+.actions button {
+    border: none;
+    padding: 6px 8px;
+    border-radius: 7px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.buy {
+    background: #e4f5ed;
+    color: #4eaa7e;
+}
+
+.delete {
+    background: #ffe8ed;
+    color: #e57b9c;
+}
+
+.bought {
+    opacity: .5;
+}
+
+.bought h3 {
+    text-decoration: line-through;
+}
+
+.empty {
+    text-align: center;
+    padding: 35px 10px;
+    color: #aaa2b5;
+    font-size: 13px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 25px 10px;
+    color: #b49bad;
+    font-size: 11px;
+}
+
+/* TABLET AND DESKTOP */
+
+@media(min-width: 768px) {
+
+    header {
+        padding: 30px calc((100% - 850px)/2);
+        border-radius: 0 0 35px 35px;
+    }
+
+    .container {
+        max-width: 850px;
+        padding: 30px 20px;
+    }
+
+    .stats {
+        gap: 20px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-card h2 {
+        font-size: 23px;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 25px;
+        align-items: start;
+    }
+
+    .section {
+        margin-top: 30px;
+    }
+
+    .item {
+        padding: 15px;
+    }
+}
+
+/* SMALL PHONES */
+
+@media(max-width: 360px) {
+    .stat-card {
+        padding: 12px 5px;
+    }
+
+    .stat-card h2 {
+        font-size: 14px;
+    }
+
+    .stat-card p {
+        font-size: 9px;
+    }
+
+    .item {
+        padding: 9px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="topbar">
+        <div class="logo">Pink<span>Basket</span> 🛒</div>
+        <div class="profile">🩷</div>
+    </div>
+
+    <div class="header-content">
+        <h1>Hey Shopper! 👋<br>Ready to shop?</h1>
+        <p>Your little shopping companion. Shop smart, spend happy!</p>
+    </div>
+
+</header>
+
+<div class="container">
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <div class="emoji">📝</div>
+            <p>To Buy</p>
+            <h2 class="pink" id="toBuy">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <div class="emoji">💰</div>
+            <p>Spent</p>
+            <h2 class="blue" id="spent">₹0</h2>
+        </div>
+
+        <div class="stat-card">
+            <div class="emoji">🛍️</div>
+            <p>Total</p>
+            <h2 class="purple" id="total">₹0</h2>
+        </div>
+
+    </div>
+
+    <div class="main-grid">
+
+        <!-- ADD ITEM -->
+
+        <section class="section">
+
+            <h2 class="section-title">✨ Add New Item</h2>
+
+            <div class="card">
+
+                <form id="groceryForm">
+
+                    <label>Item Name</label>
+                    <input type="text" id="itemName"
+                    placeholder="e.g. Apples" required>
+
+                    <label>Category</label>
+                    <select id="category">
+                        <option value="Fruits">🍎 Fruits</option>
+                        <option value="Vegetables">🥦 Vegetables</option>
+                        <option value="Dairy">🥛 Dairy</option>
+                        <option value="Food">🍞 Food</option>
+                        <option value="Snacks">🍿 Snacks</option>
+                        <option value="Electronics">🎧 Electronics</option>
+                        <option value="Household">🧹 Household</option>
+                        <option value="Others">📦 Others</option>
+                    </select>
+
+                    <label>Quantity</label>
+                    <input type="number" id="quantity"
+                    min="1" value="1" required>
+
+                    <label>Price per item (₹)</label>
+                    <input type="number" id="price"
+                    min="0" step="0.01"
+                    placeholder="Enter price" required>
+
+                    <button type="submit" class="add-btn">
+                        + Add to Basket 🛒
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- SHOPPING LIST -->
+
+        <section class="section">
+
+            <h2 class="section-title">🛒 My Shopping List</h2>
+
+            <input type="text" id="search"
+            class="search" placeholder="🔍 Search groceries...">
+
+            <div class="filters">
+
+                <button class="filter-btn active"
+                data-category="All">All</button>
+
+                <button class="filter-btn"
+                data-category="Fruits">🍎 Fruits</button>
+
+                <button class="filter-btn"
+                data-category="Vegetables">🥦 Veggies</button>
+
+                <button class="filter-btn"
+                data-category="Dairy">🥛 Dairy</button>
+
+                <button class="filter-btn"
+                data-category="Food">🍞 Food</button>
+
+                <button class="filter-btn"
+                data-category="Snacks">🍿 Snacks</button>
+
+                <button class="filter-btn"
+                data-category="Electronics">🎧 Electronics</button>
+
+                <button class="filter-btn"
+                data-category="Household">🧹 Home</button>
+
+                <button class="filter-btn"
+                data-category="Others">📦 Others</button>
+
+            </div>
+
+            <div id="shoppingList"></div>
+
+        </section>
+
+    </div>
+
+</div>
+
+<footer>
+    Made with 🩷 for happy shopping!
+</footer>
+
+<script>
+
+let groceries =
+JSON.parse(localStorage.getItem("groceries")) || [];
+
+let currentFilter = "All";
+
+const emojis = {
+    Fruits: "🍎",
+    Vegetables: "🥦",
+    Dairy: "🥛",
+    Food: "🍞",
+    Snacks: "🍿",
+    Electronics: "🎧",
+    Household: "🧹",
+    Others: "📦"
+};
+
+// ADD ITEM
+
+document.getElementById("groceryForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const name =
+    document.getElementById("itemName").value.trim();
+
+    const category =
+    document.getElementById("category").value;
+
+    const quantity =
+    Number(document.getElementById("quantity").value);
+
+    const price =
+    Number(document.getElementById("price").value);
+
+    if (!name || !Number.isFinite(quantity) ||
+        !Number.isFinite(price) || quantity < 1 ||
+        price < 0) {
+        alert("Please enter valid details!");
+        return;
+    }
+
+    groceries.push({
+        id: Date.now() + Math.random(),
+        name,
+        category,
+        quantity,
+        price,
+        bought: false
+    });
+
+    saveData();
+
+    this.reset();
+
+    document.getElementById("quantity").value = 1;
+
+});
+
+// SAVE DATA
+
+function saveData() {
+
+    localStorage.setItem(
+        "groceries",
+        JSON.stringify(groceries)
+    );
+
+    displayItems();
+    updateStats();
+}
+
+// DISPLAY ITEMS
+
+function displayItems() {
+
+    const list =
+    document.getElementById("shoppingList");
+
+    const search =
+    document.getElementById("search")
+    .value.toLowerCase();
+
+    const filtered = groceries.filter(item => {
+
+        const matchesCategory =
+        currentFilter === "All" ||
+        item.category === currentFilter;
+
+        const matchesSearch =
+        item.name.toLowerCase().includes(search);
+
+        return matchesCategory && matchesSearch;
+
+    });
+
+    list.innerHTML = "";
+
+    if (filtered.length === 0) {
+
+        list.innerHTML = `
+            <div class="empty">
+                🛍️ Your basket is waiting!<br>
+                Add something to your list.
+            </div>
+        `;
+
+        return;
+    }
+
+    filtered.forEach(item => {
+
+        const div = document.createElement("div");
+
+        div.className =
+        "item" + (item.bought ? " bought" : "");
+
+        const info = document.createElement("div");
+        info.className = "item-info";
+
+        const icon = document.createElement("div");
+        icon.className = "item-icon";
+        icon.textContent = emojis[item.category];
+
+        const details = document.createElement("div");
+
+        const title = document.createElement("h3");
+        title.textContent = item.name;
+
+        const subtitle = document.createElement("small");
+        subtitle.textContent =
+        `${item.category} • Qty: ${item.quantity}`;
+
+        details.append(title, subtitle);
+        info.append(icon, details);
+
+        const right = document.createElement("div");
+        right.className = "item-right";
+
+        const amount = document.createElement("strong");
+        amount.textContent =
+        "₹" + (item.price * item.quantity).toFixed(2);
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const buyButton = document.createElement("button");
+        buyButton.className = "buy";
+        buyButton.textContent =
+        item.bought ? "Undo" : "✓ Bought";
+
+        buyButton.onclick = () =>
+        toggleBought(item.id);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "✕";
+
+        deleteButton.onclick = () =>
+        deleteItem(item.id);
+
+        actions.append(buyButton, deleteButton);
+
+        right.append(amount, actions);
+
+        div.append(info, right);
+
+        list.appendChild(div);
+
+    });
+
+}
+
+// PURCHASE STATUS
+
+function toggleBought(id) {
+
+    groceries = groceries.map(item => {
+
+        if (item.id === id) {
+            item.bought = !item.bought;
+        }
+
+        return item;
+
+    });
+
+    saveData();
+}
+
+// DELETE ITEM
+
+function deleteItem(id) {
+
+    groceries =
+    groceries.filter(item => item.id !== id);
+
+    saveData();
+}
+
+// UPDATE STATISTICS
+
+function updateStats() {
+
+    const pending =
+    groceries.filter(item => !item.bought);
+
+    const purchased =
+    groceries.filter(item => item.bought);
+
+    const spent = purchased.reduce(
+        (sum, item) =>
+        sum + item.price * item.quantity, 0
+    );
+
+    const total = groceries.reduce(
+        (sum, item) =>
+        sum + item.price * item.quantity, 0
+    );
+
+    document.getElementById("toBuy").textContent =
+    pending.reduce(
+        (sum, item) => sum + item.quantity, 0
+    );
+
+    document.getElementById("spent").textContent =
+    "₹" + spent.toFixed(2);
+
+    document.getElementById("total").textContent =
+    "₹" + total.toFixed(2);
+
+}
+
+// CATEGORY FILTER
+
+document.querySelectorAll(".filter-btn")
+.forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        document.querySelectorAll(".filter-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+        currentFilter = this.dataset.category;
+
+        displayItems();
+
+    });
+
+});
+
+// SEARCH
+
+document.getElementById("search")
+.addEventListener("input", displayItems);
+
+// INITIAL DISPLAY
+
+displayItems();
+updateStats();
+
+</script>
+
+</body>
+</html>
